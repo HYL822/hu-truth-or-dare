@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>胡-真心话大冒险 - 远程联机版</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>胡-真心话大冒险</h1>
+        <p>远程联机版 - 小心采摘，避开毒葡萄！</p>
+    </header>
+    
+    <div class="container">
+        <div class="connection-panel" id="connectionPanel">
+            <h2>联机设置</h2>
+            <div class="connection-form">
+                <input type="text" id="roomId" placeholder="输入房间号" value="room123">
+                <input type="text" id="playerName" placeholder="输入玩家名称">
+                <button id="createRoomBtn">创建房间</button>
+                <button id="joinRoomBtn">加入房间</button>
+                <div class="connection-status" id="connectionStatus">未连接</div>
+            </div>
+        </div>
+        
+        <div class="game-info hidden" id="gameInfo">
+            <div class="player-info player-a" id="playerAInfo">
+                <h3>玩家 A</h3>
+                <p>状态: <span id="playerAStatus">设置毒葡萄</span></p>
+            </div>
+            <div class="player-info player-b" id="playerBInfo">
+                <h3>玩家 B</h3>
+                <p>状态: <span id="playerBStatus">等待</span></p>
+            </div>
+        </div>
+        
+        <div class="message-box hidden" id="message">
+            玩家A：请秘密选择一个有毒的葡萄（玩家B请勿偷看）
+        </div>
+        
+        <div class="game-board hidden" id="gameBoard">
+            <!-- 25个葡萄将由JavaScript生成 -->
+        </div>
+        
+        <div class="controls hidden" id="gameControls">
+            <button id="resetBtn">重新开始</button>
+            <button id="showPoisonBtn" class="hidden">显示毒葡萄</button>
+        </div>
+        
+        <div class="instructions">
+            <h2>游戏规则</h2>
+            <ol>
+                <li>玩家A和玩家B轮流秘密选择一个有毒的葡萄（对方不可见）</li>
+                <li>玩家轮流采摘葡萄，被选中的葡萄会变灰</li>
+                <li>当玩家选中含有毒的葡萄时，游戏结束</li>
+                <li>采到毒葡萄的玩家需要接受真心话大冒险惩罚</li>
+                <li>游戏结束后可以查看双方设置的毒葡萄位置</li>
+            </ol>
+            <h2>联机说明</h2>
+            <ol>
+                <li>一位玩家点击"创建房间"，另一位点击"加入房间"</li>
+                <li>使用相同的房间号</li>
+                <li>创建房间的玩家将自动成为玩家A</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="result-screen" id="resultScreen">
+        <div class="result-content">
+            <h2>游戏结束！</h2>
+            <div class="winner" id="winnerText">玩家B 获胜！</div>
+            <div class="loser" id="loserText">玩家A 采到了毒葡萄</div>
+            <p>毒葡萄位置已显示在棋盘上</p>
+            <button id="playAgainBtn">再玩一次</button>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
